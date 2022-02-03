@@ -1,0 +1,48 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: staging
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stackoverflowclone
+  namespace: staging
+  labels:
+    app: stackoverflowclone
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: stackoverflowclone
+  template:
+    metadata:
+      labels:
+        app: stackoverflowclone
+    spec:
+      containers:
+      - name: stackoverflowclone
+        image: public.ecr.aws/q8p7e5v3/stackoverflowclonejs:latest
+        ports:
+        - name: http
+          containerPort: 8080
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 100m
+          limits:
+            memory: 128Mi
+            cpu: 300m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stackoverflowclone
+  namespace: staging
+spec:
+  selector:
+    app: stackoverflowclone
+  ports:
+  - protocol: TCP
+    port: 8080

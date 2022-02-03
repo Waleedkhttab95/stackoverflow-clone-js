@@ -1,0 +1,21 @@
+{
+  "name": "stackoverflow-clone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "node ./migrate.js",
+    "seed": "node ./seed.js",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "knex": "^1.0.2",
+    "pg": "^8.7.1"
+  }
+}
